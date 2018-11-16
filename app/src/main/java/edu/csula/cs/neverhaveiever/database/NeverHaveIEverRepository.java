@@ -9,6 +9,7 @@ import edu.csula.cs.neverhaveiever.models.Game;
 import edu.csula.cs.neverhaveiever.models.Question;
 import edu.csula.cs.neverhaveiever.models.Response;
 import edu.csula.cs.neverhaveiever.models.User;
+import edu.csula.cs.neverhaveiever.models.UserGameJoin;
 
 public class NeverHaveIEverRepository {
     private GameDao mGameDao;
@@ -40,6 +41,40 @@ public class NeverHaveIEverRepository {
 
     LiveData<List<Response>> getAllResponseForQuestion(int questionID) {
         return mResponseDao.loadResponsesForQuestion(questionID);
+    }
+
+    void insertNewGame(User creator, Game newGame) {
+        inserNewGame(creator.getId(), newGame);
+    }
+
+    void inserNewGame(int creatorID, Game newGame) {
+        int gameId = (int)mGameDao.insertGame(newGame)[0];
+        UserGameJoin addCreatorToGame = new UserGameJoin(creatorID, gameId);
+        insertNewGameJoin(addCreatorToGame);
+    }
+
+    void insertNewGameJoin(UserGameJoin newUserGameJoin) {
+        mUserGameJoinDao.insertUserGameJoins(newUserGameJoin);
+    }
+
+    void insertNewQuestion(Game belongsToGame, Question newQuestion) {
+        insertNewQuestion(belongsToGame.getId(), newQuestion);
+    }
+
+    void insertNewQuestion(int gameId, Question newQuestion) {
+        if(gameId != newQuestion.getGameId()) {
+            throw new IllegalArgumentException("gameId did not match id in newQuestion");
+        }
+
+        insertNewQuestion(newQuestion);
+    }
+
+    void insertNewQuestion(Question newQuestion) {
+        mQuestionDao.insertQuestion(newQuestion);
+    }
+
+    void insertNewResponse(Response newResponse) {
+        mResponseDao.insertResponse(newResponse);
     }
 
     //Add async task here to udpate the room from the remote db

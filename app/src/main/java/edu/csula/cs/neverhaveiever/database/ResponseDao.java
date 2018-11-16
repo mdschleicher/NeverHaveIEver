@@ -15,7 +15,7 @@ import edu.csula.cs.neverhaveiever.models.Response;
 @Dao
 public interface ResponseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertResponse(Response... Response);
+    long[] insertResponse(Response... Response);
 
     @Update
     public void updateResponse(Response... responses);

@@ -16,7 +16,7 @@ import edu.csula.cs.neverhaveiever.models.User;
 @Dao
 public interface QuestionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertQuestion(Question... questions);
+    long[] insertQuestion(Question... questions);
 
     @Update
     public void updateQuestions(Question... questions);

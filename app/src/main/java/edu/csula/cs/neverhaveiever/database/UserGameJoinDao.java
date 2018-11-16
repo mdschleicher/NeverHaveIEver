@@ -17,7 +17,7 @@ import edu.csula.cs.neverhaveiever.models.UserGameJoin;
 @Dao
 public interface UserGameJoinDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertUserGameJoins(UserGameJoin... userGameJoins);
+    long[] insertUserGameJoins(UserGameJoin... userGameJoins);
 
     @Update
     public void updateUserGameJoins(UserGameJoin... userGameJoins);

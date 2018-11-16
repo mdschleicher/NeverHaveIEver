@@ -39,6 +39,14 @@ public class Question {
         this.id = id;
     }
 
+    public int getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(int gameId) {
+        this.gameId = gameId;
+    }
+
     public String getText() {
         return text;
     }
