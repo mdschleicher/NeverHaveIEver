@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "1091844240519",
-    "firebase_url": "https://neverhaveiever-d9f0d.firebaseio.com",
-    "project_id": "neverhaveiever-d9f0d",
-    "storage_bucket": "neverhaveiever-d9f0d.appspot.com"
+    "project_number": "695176772004",
+    "firebase_url": "https://test-e41cc.firebaseio.com",
+    "project_id": "test-e41cc",
+    "storage_bucket": "test-e41cc.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1091844240519:android:b5cdfa59e9563a55",
+        "mobilesdk_app_id": "1:695176772004:android:b5cdfa59e9563a55",
         "android_client_info": {
           "package_name": "edu.csula.cs.neverhaveiever"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1091844240519-qmc9fh303hu0o3atar6nnmnumd4ro4de.apps.googleusercontent.com",
+          "client_id": "695176772004-16q06umag2d8ge7ssd0odu2gt7jhst1i.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCD16TTYemoP0fPYqq1R7SlUgrvOBAi8SE"
+          "current_key": "AIzaSyByItVQr72johPL3yxMsQIJw4WasQLHUxk"
         }
       ],
       "services": {
