@@ -2,6 +2,7 @@ package edu.csula.cs.neverhaveiever.models;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
@@ -16,9 +17,15 @@ public class Response {
     private boolean response;
     private int questionId;
 
+    @Ignore
     public Response() {
     }
 
+    public void setQuestionId(int questionId) {
+        this.questionId = questionId;
+    }
+
+    @Ignore
     public Response(boolean response, int questionId) {
         this.response = response;
         this.questionId = questionId;
@@ -45,4 +52,6 @@ public class Response {
     public void setResponse(boolean response) {
         this.response = response;
     }
+
+    public int getQuestionId() { return questionId; }
 }

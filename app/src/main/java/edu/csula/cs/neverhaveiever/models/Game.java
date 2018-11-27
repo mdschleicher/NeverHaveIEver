@@ -1,6 +1,7 @@
 package edu.csula.cs.neverhaveiever.models;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity
@@ -10,10 +11,11 @@ public class Game {
     private String name;
     private String joinCode;
 
+    @Ignore
     public Game() {
 
     }
-
+    @Ignore
     public Game(String name, String joinCode) {
         this.name = name;
         this.joinCode = joinCode;

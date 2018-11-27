@@ -24,6 +24,7 @@ public class User {
         this.photoFilename = photoFilename;
     }
 
+    @Ignore
     public User() {
 
     }
