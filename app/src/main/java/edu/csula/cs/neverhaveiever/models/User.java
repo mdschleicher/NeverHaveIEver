@@ -3,12 +3,14 @@ package edu.csula.cs.neverhaveiever.models;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 @Entity
 public class User {
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @PrimaryKey
+    @NonNull
+    private String id;
     private String name;
     private String photoFilename;
 
@@ -18,7 +20,7 @@ public class User {
         this.photoFilename = photoFilename;
     }
 
-    public User(int id, String name, String photoFilename) {
+    public User(String id, String name, String photoFilename) {
         this.id = id;
         this.name = name;
         this.photoFilename = photoFilename;
@@ -29,11 +31,11 @@ public class User {
 
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

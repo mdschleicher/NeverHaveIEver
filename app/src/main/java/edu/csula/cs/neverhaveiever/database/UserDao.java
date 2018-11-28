@@ -1,5 +1,6 @@
 package edu.csula.cs.neverhaveiever.database;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -17,6 +18,9 @@ public interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertUsers(User... users);
 
+    @Insert
+    void insertUser(User user);
+
     @Update
     public void updateUsers(User... users);
 
@@ -24,5 +28,5 @@ public interface UserDao {
     public void deleteUsers(User... users);
 
     @Query("Select * FROM user")
-    public List<User> loadAllUsers();
+    LiveData<List<User>> loadAllUsers();
 }

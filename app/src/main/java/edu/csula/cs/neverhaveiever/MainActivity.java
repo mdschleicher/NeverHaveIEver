@@ -1,8 +1,16 @@
 package edu.csula.cs.neverhaveiever;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -11,50 +19,48 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.List;
+
+import edu.csula.cs.neverhaveiever.database.NeverHaveIEverViewModel;
+import edu.csula.cs.neverhaveiever.models.User;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    String TAG = "db";
-    private DatabaseReference mDatabase;
+    private TextInputEditText name;
+    private TextInputEditText image;
+
+    private NeverHaveIEverViewModel neverHaveIEverViewModel;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.sign_in);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        name = findViewById(R.id.name);
+        image = findViewById(R.id.image);
 
-        // sets the value of a user block with the id of 1 and the username to john.
-        //mDatabase.child("users").child("1").child("username").setValue("john");
+        neverHaveIEverViewModel = ViewModelProviders.of(this).get(NeverHaveIEverViewModel.class);
 
-        System.out.print(mDatabase.child("users"));
+        Button button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
 
-    }
+            public void onClick(View v) {
+                neverHaveIEverViewModel.CreateUser(name.getText().toString(), image.getText().toString());
+            }
+        });
 
-    // posting a user to db.
-    // uses userId as a unique id.
-    private void writeNewUser(String userId, String name, String email) {
-        User user = new User(name, email);
-        // child is making a child from users.
-        // also counts as ID.
-        mDatabase.child("users").child(userId).setValue(user);
-    }
+        neverHaveIEverViewModel.getAllUser().observe(this, new Observer<List<User>>() {
+            @Override
+            public void onChanged(@Nullable List<User> user) {
+                if (user.size() > 0 ) {
+                    Log.d("SOMETHING_UNIQUE", user.get(0).getName());
+                    Log.d("SOMETHING_UNIQUE", Integer.toString(user.size()));
+                }
+            }
+        });
 
-}
-
-@IgnoreExtraProperties
-class User {
-
-    public String username;
-    public String email;
-
-    public User() {
-        // Default constructor required for calls to DataSnapshot.getValue(User.class)
-    }
-
-    public User(String username, String email) {
-        this.username = username;
-        this.email = email;
     }
 
 }

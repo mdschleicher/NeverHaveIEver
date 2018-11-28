@@ -12,7 +12,7 @@ import edu.csula.cs.neverhaveiever.models.Response;
 import edu.csula.cs.neverhaveiever.models.User;
 import edu.csula.cs.neverhaveiever.models.UserGameJoin;
 
-@Database(entities = {Game.class, Question.class, Response.class, User.class, UserGameJoin.class}, version = 1)
+@Database(entities = {Game.class, Question.class, Response.class, User.class, UserGameJoin.class}, version = 4)
 public abstract class NeverHaveIEverDatabase extends RoomDatabase {
 
     public abstract GameDao gameDao();
@@ -28,7 +28,9 @@ public abstract class NeverHaveIEverDatabase extends RoomDatabase {
             synchronized ((NeverHaveIEverDatabase.class)) {
                 if(INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            NeverHaveIEverDatabase.class, "never_have_i_ever").build();
+                            NeverHaveIEverDatabase.class, "never_have_i_ever")
+                            .fallbackToDestructiveMigration()
+                            .build();
                 }
             }
         }
