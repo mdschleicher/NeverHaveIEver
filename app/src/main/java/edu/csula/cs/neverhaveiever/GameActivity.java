@@ -8,15 +8,24 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.csula.cs.neverhaveiever.models.Game;
 import edu.csula.cs.neverhaveiever.models.Question;
 
 public class GameActivity extends AppCompatActivity {
@@ -28,10 +37,15 @@ public class GameActivity extends AppCompatActivity {
 
     final String MY_PREFS_NAME = "GAME";
 
+    private List<Question> questionList;
+    private RecyclerView recyclerView;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
+
+        questionList = new ArrayList<Question>();
 
         g_game_lobby_name = findViewById(R.id.g_l_n);
 
@@ -49,7 +63,41 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        //        onCreateDialog(savedInstanceState).show();
+        final QuestionAdapter adapter = new QuestionAdapter(this, questionList);
+
+
+        recyclerView = findViewById(R.id.question_recycler_view);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+        SharedPreferences prefs_game = getSharedPreferences("GAME", MODE_PRIVATE);
+        String gameId  = prefs_game.getString("game_key", null);
+        final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("questions").child(gameId);
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Log.d("FIRE_BASE_SUCCESS", "Count of games: "+ Long.toString(dataSnapshot.getChildrenCount()));
+                questionList.clear();
+
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    Question question = postSnapshot.getValue(Question.class);
+                    questionList.add(question);
+                }
+
+                adapter.setQuestionList(questionList);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("FIRE_BASE_ERROR", "Failed to read value.", error.toException());
+            }
+        });
+
+
 
     }
 
@@ -66,15 +114,17 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 SharedPreferences prefs_user = getSharedPreferences("USER", MODE_PRIVATE);
                 String user_key = prefs_user.getString("user_key", null);
+                String user_image_url = prefs_user.getString("user_image_url", null);
+                String user_name = prefs_user.getString("user_name", null);
                 SharedPreferences prefs_game = getSharedPreferences("GAME", MODE_PRIVATE);
                 String gameId  = prefs_game.getString("game_key", null);
                 String key = db.push().getKey();
 
                 String statement = edditext.getText().toString();
 
-                Question question = new Question(key, statement, gameId, user_key);
+                Question question = new Question(key, statement, gameId, user_key, user_name, user_image_url);
 
-                db.child("questions").child(key).setValue(question);
+                db.child("questions").child(gameId).child(key).setValue(question);
             }
         });
 
