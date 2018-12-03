@@ -63,7 +63,9 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        final QuestionAdapter adapter = new QuestionAdapter(this, questionList);
+        SharedPreferences userPrefs = getSharedPreferences("USER", MODE_PRIVATE);
+
+        final QuestionAdapter adapter = new QuestionAdapter(this, questionList, userPrefs);
 
 
         recyclerView = findViewById(R.id.question_recycler_view);

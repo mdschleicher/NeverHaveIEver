@@ -3,18 +3,27 @@ package edu.csula.cs.neverhaveiever;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.csula.cs.neverhaveiever.models.Question;
+import edu.csula.cs.neverhaveiever.models.Response;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.GameViewHolder>{
 
@@ -22,13 +31,17 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.GameVi
 
     private List<Question> questionList;
 
+    private Context context;
 
+    private SharedPreferences sharedPreferences;
 
     String MY_PREFS_NAME = "GAME";
 
     // constructor
-    QuestionAdapter(Context context, List<Question> questionList) {
+    QuestionAdapter(Context context, List<Question> questionList, SharedPreferences sharedPreferences) {
         this.questionList = questionList;
+        this.context = context;
+        this.sharedPreferences = sharedPreferences;
         mInflater = LayoutInflater.from(context);
     }
 
@@ -37,7 +50,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.GameVi
     public GameViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = mInflater.inflate(R.layout.ask_question, parent, false);
 
-        return new GameViewHolder(itemView);
+        return new GameViewHolder(itemView, this.context);
     }
 
     void setQuestionList(List<Question> QuestionList) {
@@ -65,6 +78,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.GameVi
             Picasso.get().load(imageUrl).into(holder.host_profile_picture);
         }
 
+
     }
 
 
@@ -75,14 +89,18 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.GameVi
         private TextView name;
         private TextView question;
         private ImageView host_profile_picture;
+        private Context context;
 
-        public GameViewHolder(View itemView) {
+
+        public GameViewHolder(View itemView, Context context) {
             super(itemView);
+
+
             // populating our holder to content of the layout.
             host_profile_picture =  itemView.findViewById(R.id.question_person);
             name = itemView.findViewById(R.id.question_name);
             question = itemView.findViewById(R.id.question_question);
-
+            this.context = context;
             // sets the on click listener for item.
             itemView.setOnClickListener(this);
 
@@ -91,19 +109,17 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.GameVi
         @Override
         public void onClick(View v) {
 
-//            Intent completed_Profile = new Intent(activity , GameActivity.class);
-//
-//
-//            String joinCode = gameList.get(getAdapterPosition()).getJoinCode();
-//            String name = gameList.get(getAdapterPosition()).getName();
-//            // Define a new intent to browse the url of the specific item
-//            // SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-//
-//            editor.putString("game_key", joinCode);
-//            editor.putString("game_name", name);
-//            editor.apply();
-//
-//            activity.startActivity(completed_Profile);
+            Intent completed_Profile = new Intent(this.context , ResponseActivity.class);
+
+
+            String joinCode = questionList.get(getAdapterPosition()).getAccess_code();
+            String question = questionList.get(getAdapterPosition()).getQuestion();
+            String author = questionList.get(getAdapterPosition()).getUserId();
+            completed_Profile.putExtra("access_code", joinCode);
+            completed_Profile.putExtra("question", question);
+            completed_Profile.putExtra("author", author);
+
+            context.startActivity(completed_Profile);
         }
 
     }
