@@ -9,11 +9,11 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 public class Response {
     private boolean response;
-    private int questionId;
+    private String questionId;
     private String userPicture;
     private String userId;
 
-    public Response(boolean response, int questionId, String userPicture, String userId) {
+    public Response(boolean response, String questionId, String userPicture, String userId) {
         this.response = response;
         this.questionId = questionId;
         this.userPicture = userPicture;
@@ -28,7 +28,7 @@ public class Response {
         return response;
     }
 
-    public int getQuestionId() {
+    public String getQuestionId() {
         return questionId;
     }
 
@@ -44,7 +44,7 @@ public class Response {
         this.response = response;
     }
 
-    public void setQuestionId(int questionId) {
+    public void setQuestionId(String questionId) {
         this.questionId = questionId;
     }
 

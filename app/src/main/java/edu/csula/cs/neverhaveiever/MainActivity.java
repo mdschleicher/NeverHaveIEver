@@ -48,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.game_recycler_view);
-        gameList = new ArrayList<Game>();
+
+        gameList = new ArrayList<>();
 
         SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
 
@@ -63,14 +64,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                Log.d("FIRE_BASE_SUCCESS", "Count of games: "+ Long.toString(dataSnapshot.getChildrenCount()));
+
                 gameList.clear();
 
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Game game = postSnapshot.getValue(Game.class);
                     gameList.add(game);
                 }
-                Log.d("FIRE_BASE_SUCCESS", gameList.get(0).getName());
                 adapter.setGameList(gameList);
             }
 

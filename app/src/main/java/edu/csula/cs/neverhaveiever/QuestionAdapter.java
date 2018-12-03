@@ -99,10 +99,12 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.GameVi
 
             String joinCode = questionList.get(getAdapterPosition()).getAccess_code();
             String question = questionList.get(getAdapterPosition()).getQuestion();
-            String author = questionList.get(getAdapterPosition()).getUserId();
+            String author_id = questionList.get(getAdapterPosition()).getUserId();
+            String question_id = questionList.get(getAdapterPosition()).getId();
             completed_Profile.putExtra("access_code", joinCode);
             completed_Profile.putExtra("question", question);
-            completed_Profile.putExtra("author", author);
+            completed_Profile.putExtra("question_id", question_id);
+            completed_Profile.putExtra("author_id", author_id);
 
             context.startActivity(completed_Profile);
         }

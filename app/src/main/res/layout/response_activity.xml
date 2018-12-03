@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/question_recycler_view"
+        android:id="@+id/response_recycler_view"
         android:layout_width="341dp"
         android:layout_height="253dp"
         android:layout_marginBottom="8dp"
@@ -48,8 +48,9 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="8dp"
         android:text="I Have"
+        android:onClick="have"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
+        app:layout_constraintEnd_toStartOf="@+id/button_never"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/question_recycler_view"
         app:layout_constraintVertical_bias="0.507" />
@@ -65,6 +66,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="I Never"
+        android:onClick="never"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
