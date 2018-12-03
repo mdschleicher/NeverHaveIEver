@@ -49,8 +49,12 @@ public class GameActivity extends AppCompatActivity {
 
         g_game_lobby_name = findViewById(R.id.g_l_n);
 
-        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
-        String game_name = prefs.getString("game_name", null);
+
+        Intent intent = getIntent();
+
+        String game_name = intent.getStringExtra("game_name");
+        String gameId = intent.getStringExtra("game_key");
+
         if (game_name != null) {
             g_game_lobby_name.setText(game_name);
         }
@@ -63,9 +67,7 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        SharedPreferences userPrefs = getSharedPreferences("USER", MODE_PRIVATE);
-
-        final QuestionAdapter adapter = new QuestionAdapter(this, questionList, userPrefs);
+        final QuestionAdapter adapter = new QuestionAdapter(this, questionList);
 
 
         recyclerView = findViewById(R.id.question_recycler_view);
@@ -73,8 +75,6 @@ public class GameActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-        SharedPreferences prefs_game = getSharedPreferences("GAME", MODE_PRIVATE);
-        String gameId  = prefs_game.getString("game_key", null);
         final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("questions").child(gameId);
 
         myRef.addValueEventListener(new ValueEventListener() {

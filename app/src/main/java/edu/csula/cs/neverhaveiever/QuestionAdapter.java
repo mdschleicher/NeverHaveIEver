@@ -2,28 +2,18 @@ package edu.csula.cs.neverhaveiever;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.csula.cs.neverhaveiever.models.Question;
-import edu.csula.cs.neverhaveiever.models.Response;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.GameViewHolder>{
 
@@ -33,15 +23,12 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.GameVi
 
     private Context context;
 
-    private SharedPreferences sharedPreferences;
 
-    String MY_PREFS_NAME = "GAME";
 
     // constructor
-    QuestionAdapter(Context context, List<Question> questionList, SharedPreferences sharedPreferences) {
+    QuestionAdapter(Context context, List<Question> questionList) {
         this.questionList = questionList;
         this.context = context;
-        this.sharedPreferences = sharedPreferences;
         mInflater = LayoutInflater.from(context);
     }
 
@@ -77,8 +64,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.GameVi
         if (imageUrl != null) {
             Picasso.get().load(imageUrl).into(holder.host_profile_picture);
         }
-
-
     }
 
 

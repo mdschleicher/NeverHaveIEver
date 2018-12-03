@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
 
-        final GameAdapter adapter = new GameAdapter(this, gameList,  editor, this);
+        final GameAdapter adapter = new GameAdapter(this, gameList);
 
         final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("games");
 

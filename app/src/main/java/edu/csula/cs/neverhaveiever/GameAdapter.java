@@ -23,17 +23,14 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
 
     private List<Game> gameList;
 
-    private SharedPreferences.Editor editor;
-
-    private Context activity;
+    private Context context;
 
     String MY_PREFS_NAME = "GAME";
 
     // constructor
-    GameAdapter(Context context, List<Game> gameList, SharedPreferences.Editor editor, Context activity) {
+    GameAdapter(Context context, List<Game> gameList) {
         this.gameList = gameList;
-        this.editor = editor;
-        this.activity = activity;
+        this.context = context;
         mInflater = LayoutInflater.from(context);
     }
 
@@ -85,19 +82,17 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
         @Override
         public void onClick(View v) {
 
-            Intent completed_Profile = new Intent(activity , GameActivity.class);
+            Intent completed_Profile = new Intent(context , GameActivity.class);
 
 
             String joinCode = gameList.get(getAdapterPosition()).getJoinCode();
             String name = gameList.get(getAdapterPosition()).getName();
-            // Define a new intent to browse the url of the specific item
-            // SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
 
-            editor.putString("game_key", joinCode);
-            editor.putString("game_name", name);
-            editor.apply();
 
-            activity.startActivity(completed_Profile);
+            completed_Profile.putExtra("game_key", joinCode);
+            completed_Profile.putExtra("game_name", name);
+
+            context.startActivity(completed_Profile);
         }
 
 
