@@ -16,6 +16,16 @@ public class Response {
     private int id;
     private boolean response;
     private int questionId;
+    private String userId;
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserId() {
+
+        return userId;
+    }
 
     @Ignore
     public Response() {

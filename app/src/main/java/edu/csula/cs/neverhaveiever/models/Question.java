@@ -1,58 +1,55 @@
 package edu.csula.cs.neverhaveiever.models;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
-import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.PrimaryKey;
 
-import static android.arch.persistence.room.ForeignKey.CASCADE;
-
-@Entity(foreignKeys = @ForeignKey(entity = Game.class,
-                                            parentColumns = "id",
-                                            childColumns = "gameId",
-                                            onDelete = CASCADE))
 public class Question {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
-    private String text;
-    private int gameId;
+    private String id;
+    private String question;
+    private String access_code;
+    private String userId;
 
-    @Ignore
     public Question() {
 
     }
 
-    @Ignore
-    public Question(String text, int gameId) {
-        this.text = text;
-        this.gameId = gameId;
-    }
-
-    public Question(int id, String text, int gameId) {
+    public Question(String id, String question, String access_code, String userId) {
         this.id = id;
-        this.text = text;
-        this.gameId = gameId;
+        this.question = question;
+        this.access_code = access_code;
+        this.userId = userId;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public String getQuestion() {
+        return question;
+    }
+
+    public String getAccess_code() {
+        return access_code;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getText() {
-        return text;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setAccess_code(String access_code) {
+        this.access_code = access_code;
     }
 
-    public void setGameId(int gameId) {
-        this.gameId = gameId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public int getGameId() { return gameId; }
+
 }

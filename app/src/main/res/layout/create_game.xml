@@ -24,10 +24,10 @@
         app:layout_constraintVertical_bias="0.069">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/name"
+            android:id="@+id/name_of_game"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name" />
+            android:hint="Name of game" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -44,10 +44,10 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/image"
+            android:id="@+id/access_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Photo" />
+            android:hint="Access code" />
     </android.support.design.widget.TextInputLayout>
 
     <TextView
@@ -59,7 +59,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="36dp"
-        android:text="Name"
+        android:text="Name of game"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.024"
@@ -76,7 +76,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="332dp"
-        android:text="Image"
+        android:text="Access code"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,11 +95,10 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="80dp"
-        android:text="Create User"
+        android:onClick="onSignUp"
+        android:text="Create Game"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-        android:onClick="onSignUp"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 </android.support.constraint.ConstraintLayout>
