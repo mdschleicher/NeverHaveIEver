@@ -49,10 +49,15 @@ dependencies {
     // picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-
+    // circle image
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 
     // card layout
     implementation 'com.android.support:cardview-v7:27.1.1'
+
+    // firebase storage and auth
+    implementation 'com.google.firebase:firebase-storage:16.0.1'
+    implementation 'com.google.firebase:firebase-auth:16.0.1'
 
 }
 
