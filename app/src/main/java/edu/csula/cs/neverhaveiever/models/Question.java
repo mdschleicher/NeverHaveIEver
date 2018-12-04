@@ -1,49 +1,76 @@
 package edu.csula.cs.neverhaveiever.models;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
-import android.arch.persistence.room.PrimaryKey;
 
-import static android.arch.persistence.room.ForeignKey.CASCADE;
-
-@Entity(foreignKeys = @ForeignKey(entity = Game.class,
-                                            parentColumns = "id",
-                                            childColumns = "gameId",
-                                            onDelete = CASCADE))
 public class Question {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
-    private String text;
-    private int gameId;
+    private String id;
+    private String question;
+    private String access_code;
+    private String userId;
+    private String name;
+    private String profilePic;
 
     public Question() {
 
     }
 
-    public Question(String text, int gameId) {
-        this.text = text;
-        this.gameId = gameId;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Question(int id, String text, int gameId) {
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
+    }
+
+    public String getName() {
+
+        return name;
+    }
+
+    public String getProfilePic() {
+        return profilePic;
+    }
+
+    public Question(String id, String question, String access_code, String userId, String name, String profilePic) {
         this.id = id;
-        this.text = text;
-        this.gameId = gameId;
+        this.question = question;
+        this.name = name;
+        this.profilePic = profilePic;
+        this.access_code = access_code;
+        this.userId = userId;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public String getQuestion() {
+        return question;
+    }
+
+    public String getAccess_code() {
+        return access_code;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getText() {
-        return text;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setAccess_code(String access_code) {
+        this.access_code = access_code;
     }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+
 }

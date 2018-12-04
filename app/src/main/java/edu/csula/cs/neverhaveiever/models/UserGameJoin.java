@@ -3,6 +3,7 @@ package edu.csula.cs.neverhaveiever.models;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Ignore;
 
 @Entity(primaryKeys = {"userId", "gameId"},
         foreignKeys = {
@@ -18,6 +19,7 @@ public class UserGameJoin {
     private int userId;
     private int gameId;
 
+    @Ignore
     public UserGameJoin() {
 
     }
