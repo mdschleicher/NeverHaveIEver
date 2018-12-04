@@ -32,8 +32,8 @@ public class CreateGame extends AppCompatActivity {
 
     public void onSignUp(View view) {
 
-
         Game game = new Game(name_of_game.getText().toString(), access_code.getText().toString());
         db.child("games").child(access_code.getText().toString()).setValue(game);
+
     }
 }

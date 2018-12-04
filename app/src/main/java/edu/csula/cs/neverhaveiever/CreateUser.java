@@ -108,8 +108,8 @@ public class CreateUser extends AppCompatActivity {
     public void allDone(View view) {
         new AlertDialog.Builder(this)
                 .setTitle("Confirm")
-                .setMessage("All the information ok?")
-                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setMessage("Are you ready to continue?")
+                .setIcon(R.drawable.ic_warning_black_24dp)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -151,6 +151,7 @@ public class CreateUser extends AppCompatActivity {
                                     startActivity(completed_Profile);
                                     finish();
                                 } else {
+
                                     // Handle failures
                                     // ...
                                 }

@@ -1,5 +1,6 @@
 package edu.csula.cs.neverhaveiever;
 
+import android.app.ActionBar;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -49,16 +50,17 @@ public class GameActivity extends AppCompatActivity {
 
         questionList = new ArrayList<Question>();
 
-        g_game_lobby_name = findViewById(R.id.g_l_n);
+        //g_game_lobby_name = findViewById(R.id.g_l_n);
 
 
         Intent intent = getIntent();
 
         String game_name = intent.getStringExtra("game_name");
         gameId = intent.getStringExtra("game_key");
-
+        Log.d("GameAdapterClick", gameId);
         if (game_name != null) {
-            g_game_lobby_name.setText(game_name);
+            setTitle(game_name.toUpperCase());
+            //    g_game_lobby_name.setText(game_name);
         }
         actionButton = findViewById(R.id.game_ask_question);
         db = FirebaseDatabase.getInstance().getReference();
@@ -113,7 +115,7 @@ public class GameActivity extends AppCompatActivity {
         builder.setTitle("Enter your statement.");
         builder.setMessage("Never Have I Ever");
         builder.setView(edditext);
-        builder.setPositiveButton("Never Have I Ever", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Submit Statement", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 SharedPreferences prefs_user = getSharedPreferences("USER", MODE_PRIVATE);
@@ -131,7 +133,7 @@ public class GameActivity extends AppCompatActivity {
                 db.child("questions").child(gameId).child(key).setValue(question);
             }
         });
-
+        builder.setNegativeButton(android.R.string.cancel, null).show();
         return builder.create();
     }
 }

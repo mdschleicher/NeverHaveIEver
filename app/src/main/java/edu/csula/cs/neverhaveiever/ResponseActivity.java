@@ -1,5 +1,6 @@
 package edu.csula.cs.neverhaveiever;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ public class ResponseActivity extends AppCompatActivity {
     TextView response_question;
     Button button_have;
     Button button_never;
+    TextView stats;
     final String MY_PREFS_NAME = "USER";
     String user_key ;
     String user_pic;
@@ -37,8 +39,11 @@ public class ResponseActivity extends AppCompatActivity {
     DatabaseReference db;
     RecyclerView recyclerView;
     List<Response> responseList;
+    int has_done;
+    int never_done;
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +53,7 @@ public class ResponseActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
+        stats = findViewById(R.id.stats);
         response_question = findViewById(R.id.response_question);
         button_have = findViewById(R.id.button_have);
         button_never = findViewById(R.id.button_never);
@@ -92,6 +98,7 @@ public class ResponseActivity extends AppCompatActivity {
                 Log.d("RESPONSE_ACTIVITY", Integer.toString(responseList.size()));
 
                 adapter.setResponseList(responseList);
+                stats();
             }
 
             @Override
@@ -101,6 +108,25 @@ public class ResponseActivity extends AppCompatActivity {
             }
         });
 
+    }
+    public void stats(){
+        for (int i = 0; i < responseList.size(); i++){
+            if (responseList.get(i).isResponse()){
+                never_done += 1;
+            }
+            else {
+                has_done += 1;
+            }
+        }
+        if (never_done > has_done) {
+            stats.setText(has_done + " / " + responseList.size() + " of your friends have done it");
+        }
+        else if (has_done > never_done){
+            stats.setText(never_done + " / " + responseList.size() + " of your friends have never done it");
+        }
+        else {
+            stats.setText("Your friends are evenly divided!!!");
+        }
     }
 
     public void have(View view) {

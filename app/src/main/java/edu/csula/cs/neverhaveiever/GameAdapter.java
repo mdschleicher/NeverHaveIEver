@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import edu.csula.cs.neverhaveiever.models.Game;
@@ -60,8 +62,8 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
     public void onBindViewHolder(GameViewHolder holder, int position) {
 
         Game currentNewsItem = gameList.get(position);
-
         holder.game_lobby_name.setText(currentNewsItem.getName());
+
     }
 
     class GameViewHolder extends RecyclerView.ViewHolder
@@ -85,9 +87,9 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
 
             Intent completed_Profile = new Intent(context , GameActivity.class);
 
-
             String joinCode = gameList.get(getAdapterPosition()).getJoinCode();
             String name = gameList.get(getAdapterPosition()).getName();
+
 
             Log.d("GameAdapterClick", joinCode);
             completed_Profile.putExtra("game_key", joinCode);

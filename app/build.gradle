@@ -42,7 +42,7 @@ dependencies {
     implementation 'com.android.support:support-annotations:26.1.0'
 
     // recycler view
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
     // constraint layout
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 
@@ -53,7 +53,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
 
     // card layout
-    implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation 'com.android.support:cardview-v7:28.0.0'
 
     // firebase storage and auth
     implementation 'com.google.firebase:firebase-storage:16.0.1'

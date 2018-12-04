@@ -28,10 +28,10 @@ public class ResponseAdapter extends RecyclerView.Adapter<ResponseAdapter.Respon
 
 
     @Override
-    public ResponseAdapter.ResponseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ResponseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = mInflater.inflate(R.layout.response, parent, false);
 
-        return new ResponseAdapter.ResponseViewHolder(itemView);
+        return new ResponseViewHolder(itemView);
     }
 
     void setResponseList(List<Response> ResponseList) {
@@ -47,7 +47,7 @@ public class ResponseAdapter extends RecyclerView.Adapter<ResponseAdapter.Respon
     }
 
     @Override
-    public void onBindViewHolder(ResponseAdapter.ResponseViewHolder holder, int position) {
+    public void onBindViewHolder(ResponseViewHolder holder, int position) {
 
         Response response = responseList.get(position);
         if (!response.isResponse()) {
