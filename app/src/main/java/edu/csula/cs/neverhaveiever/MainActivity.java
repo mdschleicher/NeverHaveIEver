@@ -51,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
         gameList = new ArrayList<>();
 
-        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-
         final GameAdapter adapter = new GameAdapter(this, gameList);
 
         final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("games");
@@ -94,9 +92,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(create_game);
             return true;
         }
-        else if (itemThatWasClickedId == R.id.join_Game){
-            System.out.println("JOINING GAME");
-        }
+//        else if (itemThatWasClickedId == R.id.join_Game){
+//            System.out.println("JOINING GAME");
+//        }
         return super.onOptionsItemSelected(item);
     }
 

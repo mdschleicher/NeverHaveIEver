@@ -34,11 +34,13 @@ public class GameActivity extends AppCompatActivity {
     FloatingActionButton actionButton;
     TextView g_game_lobby_name;
     EditText questionInput;
+    String game_key;
 
     final String MY_PREFS_NAME = "GAME";
 
     private List<Question> questionList;
     private RecyclerView recyclerView;
+    private String gameId;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         String game_name = intent.getStringExtra("game_name");
-        String gameId = intent.getStringExtra("game_key");
+        gameId = intent.getStringExtra("game_key");
 
         if (game_name != null) {
             g_game_lobby_name.setText(game_name);
@@ -119,7 +121,7 @@ public class GameActivity extends AppCompatActivity {
                 String user_image_url = prefs_user.getString("user_image_url", null);
                 String user_name = prefs_user.getString("user_name", null);
                 SharedPreferences prefs_game = getSharedPreferences("GAME", MODE_PRIVATE);
-                String gameId  = prefs_game.getString("game_key", null);
+
                 String key = db.push().getKey();
 
                 String statement = edditext.getText().toString();

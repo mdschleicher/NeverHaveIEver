@@ -50,7 +50,7 @@
             android:layout_marginTop="8dp"
             android:text="TextView"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.361"
             app:layout_constraintStart_toEndOf="@+id/question_person"
