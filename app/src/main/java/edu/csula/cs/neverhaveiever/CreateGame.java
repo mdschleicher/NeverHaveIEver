@@ -1,5 +1,6 @@
 package edu.csula.cs.neverhaveiever;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -30,7 +31,8 @@ public class CreateGame extends AppCompatActivity {
         if (!name_of_game.getText().toString().trim().isEmpty() && !access_code.getText().toString().trim().isEmpty()){
             Game game = new Game(name_of_game.getText().toString(), access_code.getText().toString());
             db.child("games").child(access_code.getText().toString()).setValue(game);
-
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         } else {
             Toast.makeText(this, "Please add a valid name", Toast.LENGTH_SHORT).show();
         }
