@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Never Have I Ever</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="what_is_your_name">I.E. Mark</string>
+    <string name="submit">Submit</string>
+    <string name="name">Name</string>
+    <string name="create_game">Create Game</string>
+    <string name="game_code">Game Code</string>
+    <string name="join_game">Join Game</string>
+    <string name="question">Question</string>
+    <string name="i_have">I Have</string>
+    <string name="i_never">I Never</string>
+
 </resources>
