@@ -14,7 +14,6 @@
         android:hint="@string/what_is_your_name"
         android:inputType="textPersonName"
         android:textAlignment="center"
-        android:textColorHint="@color/colorPrimary"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

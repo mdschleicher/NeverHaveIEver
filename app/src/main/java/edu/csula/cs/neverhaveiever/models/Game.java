@@ -12,8 +12,8 @@ public class Game {
         this.joinCode = joinCode;
     }
 
-    public Game() {
-    }
+    public Game() {}
+
 
     public String getName() {
         return name;

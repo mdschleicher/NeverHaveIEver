@@ -21,8 +21,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.csula.cs.neverhaveiever.models.Game;
-import edu.csula.cs.neverhaveiever.models.Question;
 import edu.csula.cs.neverhaveiever.models.Response;
 
 public class ResponseActivity extends AppCompatActivity {
@@ -39,8 +37,6 @@ public class ResponseActivity extends AppCompatActivity {
     DatabaseReference db;
     RecyclerView recyclerView;
     List<Response> responseList;
-    int has_done;
-    int never_done;
 
 
     @SuppressLint("SetTextI18n")
@@ -58,7 +54,15 @@ public class ResponseActivity extends AppCompatActivity {
         button_have = findViewById(R.id.button_have);
         button_never = findViewById(R.id.button_never);
 
-        response_question.setText("Never Have I Ever " + intent.getStringExtra("question"));
+        String str = intent.getStringExtra("question");
+        String[] strArray = str.split(" ");
+        StringBuilder builder = new StringBuilder();
+        for (String s : strArray) {
+            String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
+            builder.append(cap).append(" ");
+        }
+
+        response_question.setText("Never Have I Ever " + builder.toString());
 
         String author_id = intent.getStringExtra("author_id");
         question_id = intent.getStringExtra("question_id");
@@ -109,26 +113,42 @@ public class ResponseActivity extends AppCompatActivity {
         });
 
     }
-    public void stats(){
-        for (int i = 0; i < responseList.size(); i++){
-            if (responseList.get(i).isResponse()){
-                never_done += 1;
-            }
-            else {
-                has_done += 1;
+    @SuppressLint("SetTextI18n")
+    public void stats() {
+        int has_done = 0;
+        int never_done = 0;
+
+        for (int i = 0; i < responseList.size(); i++) {
+            if (responseList.get(i).isResponse()) {
+                never_done++;
+            } else if (!responseList.get(i).isResponse()) {
+                has_done++;
             }
         }
-        if (never_done > has_done) {
-            stats.setText(has_done + " / " + responseList.size() + " of your friends have done it");
+
+        if(responseList.size() == 0){
+            stats.setText("No one has answered yet!");
+        }
+        else if(never_done == 0){
+            stats.setText("No one in this room has done it!");
+        }
+        else if (has_done == 0){
+            stats.setText("Everyone in this room has done it!");
+        }
+        else if (never_done > has_done) {
+            stats.setText("In this room " + has_done + " of " + Integer.toString(responseList.size()) + " people have done it!");
         }
         else if (has_done > never_done){
-            stats.setText(never_done + " / " + responseList.size() + " of your friends have never done it");
+            stats.setText("In this room " + never_done + " of " + Integer.toString(responseList.size()) + " people have never done it!");
+        }
+        else if (has_done == never_done){
+            stats.setText("The room is divided equally!");
         }
         else {
-            stats.setText("Your friends are evenly divided!!!");
+            stats.setText("Something broke");
         }
-    }
 
+    }
     public void have(View view) {
         Response response = new Response(false, question_id, user_pic, user_key);
         db.child("responses").child(access_code).child(question_id).child(question_id + "-" +user_key).setValue(response);

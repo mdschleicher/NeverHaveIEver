@@ -1,6 +1,5 @@
 package edu.csula.cs.neverhaveiever;
 
-import android.app.ActionBar;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,21 +11,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.csula.cs.neverhaveiever.models.Game;
 import edu.csula.cs.neverhaveiever.models.Question;
 
 public class GameActivity extends AppCompatActivity {
@@ -50,18 +45,15 @@ public class GameActivity extends AppCompatActivity {
 
         questionList = new ArrayList<Question>();
 
-        //g_game_lobby_name = findViewById(R.id.g_l_n);
-
-
         Intent intent = getIntent();
 
         String game_name = intent.getStringExtra("game_name");
         gameId = intent.getStringExtra("game_key");
 
         if (game_name != null) {
-            setTitle(game_name.toUpperCase());
-            //    g_game_lobby_name.setText(game_name);
+        setTitle(game_name.toUpperCase());
         }
+
         actionButton = findViewById(R.id.game_ask_question);
         db = FirebaseDatabase.getInstance().getReference();
 
@@ -112,10 +104,10 @@ public class GameActivity extends AppCompatActivity {
 
         final EditText edditext = new EditText(this);
 
-        builder.setTitle("Enter your statement.");
+        builder.setTitle("Finish the statement");
         builder.setMessage("Never Have I Ever");
         builder.setView(edditext);
-        builder.setPositiveButton("Submit Statement", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Add Statement", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 SharedPreferences prefs_user = getSharedPreferences("USER", MODE_PRIVATE);
@@ -133,7 +125,7 @@ public class GameActivity extends AppCompatActivity {
                 db.child("questions").child(gameId).child(key).setValue(question);
             }
         });
-        builder.setNegativeButton(android.R.string.cancel, null).show();
+        builder.setNegativeButton(android.R.string.no, null);
         return builder.create();
     }
 }

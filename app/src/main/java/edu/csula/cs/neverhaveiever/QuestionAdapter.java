@@ -1,5 +1,6 @@
 package edu.csula.cs.neverhaveiever;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -8,11 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.squareup.picasso.Picasso;
-
 import java.util.List;
-
 import edu.csula.cs.neverhaveiever.models.Question;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.GameViewHolder>{
@@ -53,13 +51,21 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.GameVi
     }
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(GameViewHolder holder, int position) {
 
         Question currentNewsItem = questionList.get(position);
+        String str = currentNewsItem.getQuestion();
+        String[] strArray = str.split(" ");
+        StringBuilder builder = new StringBuilder();
+        for (String s : strArray) {
+            String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
+            builder.append(cap).append(" ");
+        }
 
         holder.name.setText(currentNewsItem.getName());
-        holder.question.setText("Never Have I Ever "+ currentNewsItem.getQuestion());
+        holder.question.setText("Never Have I Ever "+ builder.toString());
         String imageUrl = currentNewsItem.getProfilePic();
         if (imageUrl != null) {
             Picasso.get().load(imageUrl).into(holder.host_profile_picture);
@@ -101,6 +107,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.GameVi
             String question = questionList.get(getAdapterPosition()).getQuestion();
             String author_id = questionList.get(getAdapterPosition()).getUserId();
             String question_id = questionList.get(getAdapterPosition()).getId();
+            String name = questionList.get(getAdapterPosition()).getName();
+            completed_Profile.putExtra("user_name", name);
             completed_Profile.putExtra("access_code", joinCode);
             completed_Profile.putExtra("question", question);
             completed_Profile.putExtra("question_id", question_id);

@@ -1,6 +1,5 @@
 package edu.csula.cs.neverhaveiever;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,8 +14,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -107,7 +104,7 @@ public class CreateUser extends AppCompatActivity {
 
     public void allDone(View view) {
         new AlertDialog.Builder(this)
-                .setTitle("Confirm")
+                .setTitle("Ready?")
                 .setMessage("Are you ready to continue?")
                 .setIcon(R.drawable.ic_warning_black_24dp)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -151,7 +148,6 @@ public class CreateUser extends AppCompatActivity {
                                     startActivity(completed_Profile);
                                     finish();
                                 } else {
-
                                     // Handle failures
                                     // ...
                                 }

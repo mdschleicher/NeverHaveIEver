@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "695176772004",
+    "firebase_url": "https://test-e41cc.firebaseio.com",
+    "project_id": "test-e41cc",
+    "storage_bucket": "test-e41cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:695176772004:android:b5cdfa59e9563a55",
+        "android_client_info": {
+          "package_name": "edu.csula.cs.neverhaveiever"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "695176772004-4trgui9l0875b85916pgh3ann03h39hu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.csula.cs.neverhaveiever",
+            "certificate_hash": "d9e094acd9271aa514771fca8d0692019a792741"
+          }
+        },
+        {
+          "client_id": "695176772004-16q06umag2d8ge7ssd0odu2gt7jhst1i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByItVQr72johPL3yxMsQIJw4WasQLHUxk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "695176772004-16q06umag2d8ge7ssd0odu2gt7jhst1i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

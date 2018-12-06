@@ -7,7 +7,7 @@ public class Question {
     private String access_code;
     private String userId;
     private String name;
-    private String profilePic;
+    private  String profilePic;
 
     public Question() {
 
