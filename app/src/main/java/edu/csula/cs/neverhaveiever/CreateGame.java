@@ -34,7 +34,7 @@ public class CreateGame extends AppCompatActivity {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else {
-            Toast.makeText(this, "Please add a valid name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please add a valid name or valid access code", Toast.LENGTH_SHORT).show();
         }
     }
 }
