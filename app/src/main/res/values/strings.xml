@@ -10,5 +10,6 @@
     <string name="question">Question</string>
     <string name="i_have">I Have</string>
     <string name="i_never">I Never</string>
+    <string name="click_shutter_below_to_take_profile_picture">Click Shutter Below To Take Profile Picture</string>
 
 </resources>

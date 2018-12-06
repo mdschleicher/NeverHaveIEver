@@ -23,14 +23,14 @@ public class CreateGame extends AppCompatActivity {
         name_of_game  = findViewById(R.id.name_of_game);
         access_code = findViewById(R.id.access_code);
         db = FirebaseDatabase.getInstance().getReference();
-
     }
 
     public void onSignUp(View view) {
 
-        if (!name_of_game.getText().toString().isEmpty() && !access_code.getText().toString().isEmpty()){
+        if (!name_of_game.getText().toString().trim().isEmpty() && !access_code.getText().toString().trim().isEmpty()){
             Game game = new Game(name_of_game.getText().toString(), access_code.getText().toString());
             db.child("games").child(access_code.getText().toString()).setValue(game);
+
         } else {
             Toast.makeText(this, "Please add a valid name", Toast.LENGTH_SHORT).show();
         }

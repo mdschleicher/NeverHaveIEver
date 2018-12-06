@@ -47,7 +47,7 @@ public class CreateUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        setTitle("Create Profile");
         // code for shared preferences.
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         String restoredText = prefs.getString("user_key", null);
@@ -138,16 +138,15 @@ public class CreateUser extends AppCompatActivity {
                                     String key = db.push().getKey();
                                     User user = new User(key, name.getText().toString(), downloadUri.toString());
                                     db.child("users").child(key).setValue(user);
-
                                     SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
                                     editor.putString("user_key", key);
                                     editor.putString("user_image_url", downloadUri.toString());
                                     editor.putString("user_name", name.getText().toString());
                                     editor.apply();
-
                                     startActivity(completed_Profile);
                                     finish();
                                 } else {
+
                                     // Handle failures
                                     // ...
                                 }
@@ -155,8 +154,5 @@ public class CreateUser extends AppCompatActivity {
                         });
                     }
                 }).setNegativeButton(android.R.string.no, null).show();
-
     }
-
-
 }
