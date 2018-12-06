@@ -131,10 +131,10 @@ public class ResponseActivity extends AppCompatActivity {
         if(responseList.size() == 0){
             stats.setText("No one has answered yet!");
         }
-        else if(never_done == 0){
+        else if(has_done == 0){
             stats.setText("No one in this room has done it!");
         }
-        else if (has_done == 0){
+        else if (never_done == 0){
             stats.setText("Everyone in this room has done it!");
         }
         else if (never_done > has_done) {
