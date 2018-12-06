@@ -51,11 +51,12 @@ public class ResponseAdapter extends RecyclerView.Adapter<ResponseAdapter.Respon
 
         Response response = responseList.get(position);
         if (!response.isResponse()) {
+            //Camille the Art Major helped to select the colors for better readability
             holder.response_text.setText("Has!");
-            holder.cardView.setCardBackgroundColor(Color.RED);
+            holder.cardView.setCardBackgroundColor(Color.parseColor("#ff6961"));
         } else {
             holder.response_text.setText("Never!");
-            holder.cardView.setCardBackgroundColor(Color.GREEN);
+            holder.cardView.setCardBackgroundColor(Color.parseColor("#98FB98"));
         }
 
         String imageUrl = response.getUserPicture();
