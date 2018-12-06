@@ -14,6 +14,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -51,7 +53,7 @@ public class GameActivity extends AppCompatActivity {
         gameId = intent.getStringExtra("game_key");
 
         if (game_name != null) {
-        setTitle(game_name.toUpperCase());
+            setTitle(game_name.toUpperCase());
         }
 
         actionButton = findViewById(R.id.game_ask_question);
@@ -119,10 +121,12 @@ public class GameActivity extends AppCompatActivity {
                 String key = db.push().getKey();
 
                 String statement = edditext.getText().toString();
-
-                Question question = new Question(key, statement, gameId, user_key, user_name, user_image_url);
-
-                db.child("questions").child(gameId).child(key).setValue(question);
+                if (!statement.trim().isEmpty()) {
+                    Question question = new Question(key, statement, gameId, user_key, user_name, user_image_url);
+                    db.child("questions").child(gameId).child(key).setValue(question);
+                } else {
+                    Toast.makeText(GameActivity.this, "You can't submit a blank statement", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         builder.setNegativeButton(android.R.string.no, null);
