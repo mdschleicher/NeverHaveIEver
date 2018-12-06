@@ -32,6 +32,7 @@ public class ResponseActivity extends AppCompatActivity {
     final String MY_PREFS_NAME = "USER";
     String user_key ;
     String user_pic;
+    String user_name;
     String question_id;
     String access_code;
     DatabaseReference db;
@@ -69,6 +70,7 @@ public class ResponseActivity extends AppCompatActivity {
         access_code = intent.getStringExtra("access_code");
         user_key = prefs.getString("user_key", null);
         user_pic = prefs.getString("user_image_url", null);
+        user_name = prefs.getString("user_name", null);
         if (user_key != null) {
             if (user_key.equals(author_id)) {
                 button_never.setVisibility(View.GONE);
@@ -149,12 +151,13 @@ public class ResponseActivity extends AppCompatActivity {
         }
 
     }
+
     public void have(View view) {
-        Response response = new Response(false, question_id, user_pic, user_key);
+        Response response = new Response(false, question_id, user_pic, user_name, user_key);
         db.child("responses").child(access_code).child(question_id).child(question_id + "-" +user_key).setValue(response);
     }
     public void never(View view) {
-        Response response = new Response(true, question_id, user_pic, user_key);
+        Response response = new Response(true, question_id, user_pic, user_name, user_key);
         db.child("responses").child(access_code).child(question_id).child(question_id + "-" +user_key).setValue(response);
     }
 

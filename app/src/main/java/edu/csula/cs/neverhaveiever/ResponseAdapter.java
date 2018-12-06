@@ -51,10 +51,10 @@ public class ResponseAdapter extends RecyclerView.Adapter<ResponseAdapter.Respon
 
         Response response = responseList.get(position);
         if (!response.isResponse()) {
-            holder.response_text.setText("Has!");
+            holder.response_text.setText(response.getUserName() + " has done this");
             holder.cardView.setCardBackgroundColor(Color.RED);
         } else {
-            holder.response_text.setText("Never!");
+            holder.response_text.setText(response.getUserName() + " has never done this");
             holder.cardView.setCardBackgroundColor(Color.GREEN);
         }
 

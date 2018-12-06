@@ -11,17 +11,27 @@ public class Response {
     private boolean response;
     private String questionId;
     private String userPicture;
+    private String userName;
     private String userId;
 
-    public Response(boolean response, String questionId, String userPicture, String userId) {
+    public Response(boolean response, String questionId, String userPicture, String userName, String userId) {
         this.response = response;
         this.questionId = questionId;
         this.userPicture = userPicture;
+        this.userName = userName;
         this.userId = userId;
     }
 
     public Response() {
 
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public boolean isResponse() {

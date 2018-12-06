@@ -110,48 +110,80 @@ public class CreateUser extends AppCompatActivity {
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        String username;
+                        if ((name.getText().toString().length() == 0)) {
+                            username = "anonymous";
+                        } else {
+                            username = name.getText().toString();
+                        }
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                        byte[] data = baos.toByteArray();
+                        if (bitmap == null) {
 
-                        String path = "icons/" + UUID.randomUUID() + ".png";
-                        final StorageReference iconRef = storageRef.child(path);
-                        UploadTask uploadTask = iconRef.putBytes(data);
+                            Intent completed_Profile = new Intent(CreateUser.this, MainActivity.class);
 
-                        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                            @Override
-                            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                                if (!task.isSuccessful()) {
-                                    throw task.getException();
+                            String url = "https://firebasestorage.googleapis.com/v0/b/test-e41cc.appspot.com/o/a.png?alt=media&token=0e3b86a5-23d2-4695-ad69-82658fe27a6e";
+
+                            String key = db.push().getKey();
+                            User user = new User(key, username, url);
+                            db.child("users").child(key).setValue(user);
+                            SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                            editor.putString("user_key", key);
+                            editor.putString("user_image_url", url);
+                            editor.putString("user_name", username);
+                            editor.apply();
+                            startActivity(completed_Profile);
+                            finish();
+
+                        } else {
+
+                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                            byte[] data = baos.toByteArray();
+
+                            String path = "icons/" + UUID.randomUUID() + ".png";
+                            final StorageReference iconRef = storageRef.child(path);
+                            UploadTask uploadTask = iconRef.putBytes(data);
+
+                            Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                                @Override
+                                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                                    if (!task.isSuccessful()) {
+                                        throw task.getException();
+                                    }
+                                    // Continue with the task to get the download URL
+                                    return iconRef.getDownloadUrl();
                                 }
-                                // Continue with the task to get the download URL
-                                return iconRef.getDownloadUrl();
-                            }
-                        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Uri> task) {
-                                if (task.isSuccessful()) {
-                                    Intent completed_Profile = new Intent(CreateUser.this, MainActivity.class);
-                                    downloadUri = task.getResult();
+                            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Uri> task) {
+                                    if (task.isSuccessful()) {
+                                        Intent completed_Profile = new Intent(CreateUser.this, MainActivity.class);
+                                        downloadUri = task.getResult();
 
-                                    String key = db.push().getKey();
-                                    User user = new User(key, name.getText().toString(), downloadUri.toString());
-                                    db.child("users").child(key).setValue(user);
-                                    SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-                                    editor.putString("user_key", key);
-                                    editor.putString("user_image_url", downloadUri.toString());
-                                    editor.putString("user_name", name.getText().toString());
-                                    editor.apply();
-                                    startActivity(completed_Profile);
-                                    finish();
-                                } else {
+                                        String username;
+                                        if ((name.getText().toString().length() == 0)) {
+                                            username = "anonymous";
+                                        }
+                                        username = name.getText().toString();
 
-                                    // Handle failures
-                                    // ...
+                                        String key = db.push().getKey();
+                                        User user = new User(key, username, downloadUri.toString());
+                                        db.child("users").child(key).setValue(user);
+                                        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                                        editor.putString("user_key", key);
+                                        editor.putString("user_image_url", downloadUri.toString());
+                                        editor.putString("user_name", username);
+                                        editor.apply();
+                                        startActivity(completed_Profile);
+                                        finish();
+                                    } else {
+
+                                        // Handle failures
+                                        // ...
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        }
+
                     }
                 }).setNegativeButton(android.R.string.no, null).show();
     }
