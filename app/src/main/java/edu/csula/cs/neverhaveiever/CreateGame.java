@@ -28,7 +28,7 @@ public class CreateGame extends AppCompatActivity {
 
     public void onSignUp(View view) {
 
-        if (!name_of_game.getText().toString().isEmpty()){
+        if (!name_of_game.getText().toString().isEmpty() && !access_code.getText().toString().isEmpty()){
             Game game = new Game(name_of_game.getText().toString(), access_code.getText().toString());
             db.child("games").child(access_code.getText().toString()).setValue(game);
         } else {
