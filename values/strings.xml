@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Never Have I Ever</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="what_is_your_name">What is your name?</string>
+    <string name="submit">Submit</string>
+    <string name="everything_looks_good">Everything looks good?</string>
+    <string name="name">Name</string>
+    <string name="create_game">Create Game</string>
+    <string name="game_code">Game Code</string>
+    <string name="join_game">Join Game</string>
+    <string name="question">Question</string>
+
+</resources>
